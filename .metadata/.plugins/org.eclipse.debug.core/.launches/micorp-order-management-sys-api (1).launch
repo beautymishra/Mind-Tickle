@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.munit.launchconfig">
+    <stringAttribute key="clear_data" value="NEVER"/>
+    <stringAttribute key="launch_mule_server_version" value="org.mule.tooling.server.4.4.0.ee"/>
+    <listAttribute key="mule-project-names">
+        <listEntry value="micorp-order-management-sys-api"/>
+    </listAttribute>
+    <intAttribute key="mule.debug.payload.max.collection.size" value="100"/>
+    <booleanAttribute key="munit_run" value="true"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="micorp-order-management-sys-api"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.library.path=&#13;&#10;-Dlog4j.skipJansi=true"/>
+    <intAttribute key="remote-debug-max-stream-size" value="2"/>
+    <intAttribute key="remote-debug-port" value="6666"/>
+    <booleanAttribute key="remote-debug-suspend" value="true"/>
+    <booleanAttribute key="run_coverage" value="true"/>
+    <setAttribute key="test_names"/>
+    <setAttribute key="test_resources"/>
+</launchConfiguration>

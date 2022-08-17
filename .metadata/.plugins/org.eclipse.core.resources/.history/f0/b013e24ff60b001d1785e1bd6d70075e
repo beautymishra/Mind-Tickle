@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="create-customer" doc:id="5de1cc5a-d71a-4de9-8bfb-ee54adaafee5" >
+		<ee:transform doc:name="Transform Message" doc:id="705c1117-6b69-4843-a865-81b78b087d24" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+    "firstName": vars.inputPayload.customer.firstName,
+    "lastName": vars.inputPayload.customer.lastName,
+    "address": vars.inputPayload.customer.address,
+    "orderId": vars.orderId joinBy ""
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="d85f29f2-2329-4ec1-86e6-e13d0fdb5ed3" />
+		<http:request method="POST" doc:name="Request" doc:id="65a21d23-08b3-4d95-b47b-5d45508629b4" config-ref="HTTP_Request_configuration" path="/customer"/>
+		<logger level="INFO" doc:name="Logger" doc:id="e5433f9a-dd51-4e9f-9dd1-93c6f4c292b9" message="payload"/>
+	</flow>
+	<flow name="create-order" doc:id="aa1a581a-f36c-40b5-8fbf-b11926d007d5" >
+		<ee:transform doc:name="Transform Message" doc:id="7f4ad94d-db03-472c-ac50-a66863dce8e6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload.order]]></ee:set-payload>
+			</ee:message>
+			<ee:variables >
+			</ee:variables>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="200e2321-2c29-4758-b30e-f2d81ee55afc" />
+		<http:request method="POST" doc:name="Request" doc:id="b23cf788-41b6-4bff-be7a-5ff4e1e9749b" config-ref="HTTP_Request_configuration" path="/order"/>
+		<logger level="INFO" doc:name="Logger" doc:id="224c12bd-3432-4897-a380-7c5a83c266ab" message="#[payload]"/>
+		<set-variable value="#[payload.items.id]" doc:name="Set Variable" doc:id="550bd864-a6ee-4dac-9fcb-9ccc76fa66f4" variableName="orderId"/>
+	</flow>
+	<flow name="create-item" doc:id="607861d7-fcfe-4f86-bd4d-0d5f08904265" >
+		<foreach doc:name="For Each" doc:id="e4ba8971-8147-4e99-9668-8dc34e685e81" >
+			<ee:transform doc:name="Transform Message" doc:id="49a25031-9e06-4207-8afb-c6445e617036" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+    "id": vars.inputPayload.items.id,
+    "category": vars.inputPayload.items.category,
+    "quantity": vars.inputPayload.items.quantity,
+    "size": vars.inputPayload.items.size,
+    "orderId": vars.orderId
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<logger level="INFO" doc:name="Logger" doc:id="d908c014-f2f9-461a-bee4-1b11aaddfb5b" message="payload"/>
+			<http:request method="POST" doc:name="Request" doc:id="8e2aabe5-b724-4141-99fd-04d9a6212b23" config-ref="HTTP_Request_configuration" path="/item"/>
+			<logger level="INFO" doc:name="Logger" doc:id="be70205d-860b-4978-8fdd-f345f5c43064" message="payload"/>
+		</foreach>
+	</flow>
+</mule>

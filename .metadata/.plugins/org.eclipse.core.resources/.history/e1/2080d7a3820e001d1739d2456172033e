@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd">
+	<munit:config name="implementation-suite.xml" />
+	<munit:test name="add-order-test" doc:id="708bd2c9-b7e3-4847-80f9-b011df60cfcf" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock ORder__c" doc:id="c5bae72e-31c1-4b56-9da5-317aa0bab307" processor="salesforce:create">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="245354b2-19d2-4f3b-aee0-22e2fda85078" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://addordertest\mock_payload3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addordertest\mock_variable_3.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="eed6ed6d-04bf-4b24-84d3-95aeba4d0a1d" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://addordertest\set-event_payload3.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://addordertest\set-event_attributes3.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://addordertest\set-event_variable_3.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to add-order" doc:id="eccca9c3-1509-489a-bdd5-b4eda936603c" name="add-order"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="e56526b2-67b5-4c53-be62-0d4c6a525960" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import addordertest::assert_expression_payload3
+---
+assert_expression_payload3::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="add-item-test" doc:id="dca84057-2f63-4f3f-a030-3fc0a83efd24" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock item__c" doc:id="ad99d4e7-b1b5-427a-9ca9-3d882f7e0102" processor="salesforce:create">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6c4d8ad8-a626-4615-8ea4-a80ee9e940cd" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://additemtest\mock_payload1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://additemtest\mock_variable_1.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="eb7a041d-f37a-49c7-98c7-f6b78f25864c" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://additemtest\set-event_payload1.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://additemtest\set-event_attributes1.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://additemtest\set-event_variable_1.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to add-item" doc:id="4d0e1be2-45c4-46e0-a579-ccfdc7b48e93" name="add-item"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="6ea31990-1300-4d98-8c3a-4f413625d47a" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import additemtest::assert_expression_payload1
+---
+assert_expression_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="add-customer-test" doc:id="f17e32b4-c91c-424c-b824-0b6a1f96025d" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock customer__c" doc:id="b5e8dff6-1dc5-4a80-a81d-2dab5305a4e0" processor="salesforce:create">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b78ba2d4-8f06-4fd8-b509-c6208b7a0e1b" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://addcustomertest\mock_payload1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addcustomertest\mock_variable_1.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="70089e4c-a39d-4630-aca7-433168366caf" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://addcustomertest\set-event_payload1.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://addcustomertest\set-event_attributes1.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://addcustomertest\set-event_variable_1.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to add-customer" doc:id="e33894ff-2410-4ba2-a483-3e1766b20ae2" name="add-customer"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="2a84b044-d49a-453c-926e-4c8d6f5f1f57" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import addcustomertest::assert_expression_payload1
+---
+assert_expression_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

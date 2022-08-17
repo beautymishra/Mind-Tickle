@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="implementationFlow" doc:id="5de1cc5a-d71a-4de9-8bfb-ee54adaafee5" >
+		<ee:transform doc:name="Transform Message" doc:id="705c1117-6b69-4843-a865-81b78b087d24" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="d85f29f2-2329-4ec1-86e6-e13d0fdb5ed3" />
+		<http:request method="POST" doc:name="Request" doc:id="65a21d23-08b3-4d95-b47b-5d45508629b4" config-ref="HTTP_Request_configuration" path="/order"/>
+	</flow>
+	<flow name="implementationFlow1" doc:id="aa1a581a-f36c-40b5-8fbf-b11926d007d5" >
+		<ee:transform doc:name="Transform Message" doc:id="7f4ad94d-db03-472c-ac50-a66863dce8e6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="200e2321-2c29-4758-b30e-f2d81ee55afc" />
+		<http:request method="POST" doc:name="Request" doc:id="b23cf788-41b6-4bff-be7a-5ff4e1e9749b" config-ref="HTTP_Request_configuration" path="/customer"/>
+	</flow>
+	<flow name="implementationFlow2" doc:id="352691ce-772a-42e2-9081-f45c8e0ce6ff" >
+		<foreach doc:name="For Each" doc:id="7655dc9b-1888-4e44-8fb5-43b6dbffd462" >
+			<ee:transform doc:name="Transform Message" doc:id="64e875be-1d63-411d-b5fb-356dd041edec" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<logger level="INFO" doc:name="Logger" doc:id="691a8b76-04bf-4d87-b57c-d42e1ef70073" />
+			<http:request method="POST" doc:name="Request" doc:id="15ba71c5-3987-4787-acf4-e84a1df0cd71" config-ref="HTTP_Request_configuration" path="/item"/>
+		</foreach>
+	</flow>
+</mule>

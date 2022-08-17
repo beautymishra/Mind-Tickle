@@ -1,0 +1,51 @@
+#%RAML 1.0 DataType
+displayName: Order
+description: defines orders data type
+
+type: object
+properties:
+  poNumber:
+    type: string
+    required: true
+    displayName: poNumber
+    example: "123461"
+  signatureRequiredFlag:
+    type: boolean
+    required: true
+    displayName: signatureRequiredFlag
+    example: false
+  shipInstructions:
+    type: string
+    required: true
+    displayName: shipInstructions
+    example: "Don't break it"
+  giftWrapFlag:
+    type: boolean
+    required: true
+    displayName: giftWrapFlag
+    example: true
+  giftWrapMessage:
+    type: string
+    required: true
+    displayName: giftWrapMessage
+    example: "You Rock!"
+  currencyCode:
+    type: string
+    required: true
+    displayName: currencyCode
+    example: "USD"
+  subTotal:
+    type: number
+    required: true
+    displayName: subTotal
+    example: 41.5
+  email:
+    type: string
+    required: true
+    displayName: email
+    example: "test@test.com"
+    
+      
+  
+  
+      

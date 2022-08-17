@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd  http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
+    <flow name="micorp-order-management-prc-api-main">
+        <http:listener config-ref="micorp-order-management-prc-api-httpListenerConfig" path="/${http.basePath}">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:router config-ref="micorp-order-management-prc-api-config" />
+        <error-handler ref="error-handlerError_Handler"/>
+    </flow>
+    <flow name="post:\order:application\json:micorp-order-management-prc-api-config">
+        <json-logger:logger doc:name="Logger" doc:id="5aec22d8-e8fd-4a62-adef-aab88f767464" config-ref="JSON_Logger_Config" message="Intial Payload" />
+        <set-variable value="#[payload]" doc:name="inputPayload" doc:id="f33f5af6-7916-4af8-9e16-fe816ea413d9" variableName="inputPayload" />
+        <flow-ref doc:name="create-order" doc:id="6364da4f-8653-493c-b3f4-20af9af5a085" name="create-order" />
+        <flow-ref doc:name="create-customer" doc:id="7bc5876d-1702-41ce-bb9f-d0b6cd3ce572" name="create-customer" />
+        <flow-ref doc:name="create-item" doc:id="a00e8893-301e-4941-816f-6ad47437fcaf" name="create-item" />
+		<ee:transform doc:name="Set Response" doc:id="b9f0ba58-a6cb-4989-8ed0-4a978bc1b90d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message" : "order created successfully" ,
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="Logger" doc:id="ed033b5e-ac48-45b4-b253-c3a84c7099fd" config-ref="JSON_Logger_Config" message="Final Payload" />
+    </flow>
+</mule>

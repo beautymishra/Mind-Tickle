@@ -1,0 +1,42 @@
+[
+  {
+    "address__c": "98765 Main St San Jose 98765",
+    "ORder__c": "a005i0000074oA3AAI",
+    "lastName__c": "Leo",
+    "firstName__c": "David",
+    "Id": null,
+    "type": "Customer__c"
+  },
+  {
+    "address__c": "98765 Main St San Jose 98765",
+    "ORder__c": "a005i0000074oA3AAI",
+    "lastName__c": "Leo",
+    "firstName__c": "David",
+    "Id": null,
+    "type": "Customer__c"
+  },
+  {
+    "address__c": "1234 Main St San Jose 12345",
+    "ORder__c": "a005i0000074LL8AAM",
+    "lastName__c": "Doe",
+    "firstName__c": "John",
+    "Id": null,
+    "type": "Customer__c"
+  },
+  {
+    "address__c": "911213 Main St San Jose 911213",
+    "ORder__c": "a005i0000074lvYAAQ",
+    "lastName__c": "Kamaraj",
+    "firstName__c": "Vinodh",
+    "Id": null,
+    "type": "Customer__c"
+  },
+  {
+    "address__c": "5678 Main St San Jose 5678",
+    "ORder__c": "a005i0000074eoqAAA",
+    "lastName__c": "Stefan",
+    "firstName__c": "Damon",
+    "Id": null,
+    "type": "Customer__c"
+  }
+]

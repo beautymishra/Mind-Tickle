@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension-documentation>
+    <configs>
+        <config name="config">
+            <description><![CDATA[Default configuration]]></description>
+            <parameters>
+                <parameter name="externalDestination">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="expirationPolicy">
+                    <description><![CDATA[Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit.]]></description>
+                </parameter>
+                <parameter name="applicationName">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="applicationVersion">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="environment">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="prettyPrint">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="logLocationInfo">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="parseContentFieldsInJsonOutput">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="disabledFields">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="contentFieldsDataMasking">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </config>
+    </configs>
+    <connections/>
+    <extension name="JSON Logger">
+        <description><![CDATA[This is the main class of an extension, is the entry point from which configurations, connection providers, operations and sources are going to be declared.]]></description>
+        <parameters/>
+    </extension>
+    <operations>
+        <operation name="logger">
+            <description><![CDATA[Log a new entry]]></description>
+            <parameters>
+                <parameter name="correlationId">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="message">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="content">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="tracePoint">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="priority">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="category">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="loggerScope">
+            <description><![CDATA[Log scope]]></description>
+            <parameters>
+                <parameter name="configurationRef">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="priority">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="scopeTracePoint">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="category">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="correlationId">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+    </operations>
+    <sources/>
+    <types>
+        <type name="org.mule.extension.jsonlogger.internal.destinations.AMQDestination">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="queueOrExchangeDestination">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="url">
+                    <description><![CDATA[The region URL where the Queue resides. This URL can be obtained and configured from the Anypoint Platform &gt; MQ console.
+ Copy/paste the region URL into this field."]]></description>
+                </parameter>
+                <parameter name="clientId">
+                    <description><![CDATA[In Anypoint Platform &gt; MQ &gt; Client Apps, click an app name (or create a new app) and
+ click Copy for the Client App ID field. Paste this value in the Studio Client App ID field]]></description>
+                </parameter>
+                <parameter name="clientSecret">
+                    <description><![CDATA[In Anypoint Platform > MQ > Client Apps, click an app name (or create a new app) and
+ click Copy for the Client Secret field. Paste this value in the Studio Client Secret field.]]></description>
+                </parameter>
+                <parameter name="logCategories">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="maxBatchSize">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="org.mule.extension.jsonlogger.internal.destinations.AMQPDestination">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="amqpConfigurationRef">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="exchangeDestination">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="logCategories">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="maxBatchSize">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="org.mule.extension.jsonlogger.internal.destinations.Destination">
+            <description><![CDATA[]]></description>
+            <parameters/>
+        </type>
+        <type name="org.mule.extension.jsonlogger.internal.destinations.JMSDestination">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="jmsConfigurationRef">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="queueDestination">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="logCategories">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="maxBatchSize">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </type>
+    </types>
+</extension-documentation>

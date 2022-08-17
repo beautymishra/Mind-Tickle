@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:cloudhub="http://www.mulesoft.org/schema/mule/cloudhub"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/cloudhub http://www.mulesoft.org/schema/mule/cloudhub/current/mule-cloudhub.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="17a40f54-7b03-4bbd-ba6c-e70284464a3e" basePath="/api" >
+		<http:request-connection host="${request.host}"/>
+		<expiration-policy maxIdleTime="90" timeUnit="SECONDS" />
+	</http:request-config>
+	<json-logger:config name="JSON_Logger_Config" doc:name="JSON Logger Config" doc:id="2d674e06-fb72-49da-b590-22ba4f5d424e" environment="${mule.env}" />
+	<configuration-properties doc:name="Configuration properties" doc:id="b8b14a34-fad8-4d11-aa19-4b1e61d538e1" file="jsonLogger\log.properties" />
+	<http:listener-config name="micorp-order-management-prc-api-httpListenerConfig">
+        <http:listener-connection host="${http.host}" port="${http.port}" />
+    </http:listener-config>
+    <apikit:config name="micorp-order-management-prc-api-config" api="micorp-order-management-prc-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<configuration-properties doc:name="Configuration properties" doc:id="ae328edc-09a8-4eda-8c69-f1f7894150d2" file="properties\\${mule.env}.yaml" />
+	<global-property doc:name="Global Property" doc:id="bd7856ed-e01e-49ba-857f-0be89ecd4f60" name="mule.env" value="local" />
+	<global-property doc:name="Global Property" doc:id="ea8856fa-71dc-4d26-877f-e15acea9dbe6" name="mule.key" value="mindtickle2022!" />
+	<configuration doc:name="Configuration" doc:id="84ebceb4-ff95-4d70-a0aa-7aae862ab891" defaultErrorHandler-ref="error-handlerError_Handler" />
+	<!--   <api-gateway:autodiscovery apiId="18019490" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="6f42a0e1-2618-4878-89d0-18c8dd490009" flowRef="micorp-order-management-prc-api-main" /> -->
+</mule>

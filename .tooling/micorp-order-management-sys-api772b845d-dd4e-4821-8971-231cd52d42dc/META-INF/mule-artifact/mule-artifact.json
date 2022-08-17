@@ -1,0 +1,49 @@
+{
+  "configs": [
+    "implementation.xml",
+    "error-handler.xml",
+    "global.xml",
+    "micorp-order-management-sys-api.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:micorp-order-management-sys-api:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.4.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "api/data-type/create-customer.raml",
+        "api/data-type/create-item.raml",
+        "api/data-type/create-order.raml",
+        "api/error-response/400.json",
+        "api/error-response/401.json",
+        "api/error-response/404.json",
+        "api/error-response/500.json",
+        "api/example/request/create-customer.json",
+        "api/example/request/create-item.json",
+        "api/example/request/create-order.json",
+        "api/example/responses/create-customer-response.json",
+        "api/example/responses/create-item-response.json",
+        "api/example/responses/create-order-response.json",
+        "api/micorp-order-management-sys-api.raml",
+        "api/security-scheme/customSecurityScheme.raml",
+        "api/traits/errortrait.raml",
+        "application-types.xml",
+        "error-handler.xml",
+        "global.xml",
+        "implementation.xml",
+        "log4j2.xml",
+        "micorp-order-management-sys-api.xml",
+        "properties/dev.yaml",
+        "properties/local.yaml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

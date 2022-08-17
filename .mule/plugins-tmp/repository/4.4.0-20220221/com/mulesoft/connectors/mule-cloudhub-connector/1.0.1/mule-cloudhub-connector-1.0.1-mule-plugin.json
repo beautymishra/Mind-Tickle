@@ -1,0 +1,4444 @@
+{
+  "minMuleVersion": "4.1.1",
+  "extensionModel": {
+    "types": [{
+      "format": "json",
+      "annotations": {"typeId": "Notification"},
+      "type": "Object",
+      "fields": [
+        {
+          "model": {"type": "String"},
+          "key": {
+            "name": "id",
+            "required": "true"
+          }
+        },
+        {
+          "model": {"type": "String"},
+          "key": {
+            "name": "domain",
+            "required": "true"
+          }
+        },
+        {
+          "model": {"type": "String"},
+          "key": {"name": "message"}
+        },
+        {
+          "model": {"type": "String"},
+          "key": {"name": "priority"}
+        },
+        {
+          "model": {
+            "type": "Object",
+            "fields": [],
+            "open": {"type": "String"}
+          },
+          "key": {"name": "properties"}
+        },
+        {
+          "model": {"type": "Boolean"},
+          "key": {
+            "name": "read",
+            "required": "true"
+          }
+        },
+        {
+          "model": {"type": "DateTime"},
+          "key": {"name": "readOn"}
+        },
+        {
+          "model": {"type": "DateTime"},
+          "key": {
+            "name": "createdAt",
+            "required": "true"
+          }
+        },
+        {
+          "model": {"type": "String"},
+          "key": {
+            "name": "href",
+            "required": "true"
+          }
+        }
+      ]
+    }],
+    "messageSources": [],
+    "functions": [],
+    "configurations": [{
+      "externalLibraryModels": [],
+      "operations": [
+        {
+          "displayModel": {"displayName": "Create Notification"},
+          "semanticTerms": [],
+          "kind": "operation",
+          "executionType": "CPU_LITE",
+          "description": "Creates a new Notification",
+          "modelProperties": {},
+          "parameterGroupModels": [
+            {
+              "name": "General",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 1
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "Name of the application to bind the new notification",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": true,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "valueProviderModel": {
+                    "partOrder": 1,
+                    "requiresConnection": true,
+                    "isOpen": true,
+                    "providerId": "com.mulesoft.connectors.cloudhub.internal.value.provider.DomainsValueProvider",
+                    "requiresConfiguration": false,
+                    "modelProperties": {},
+                    "parameters": [],
+                    "providerName": "domain"
+                  },
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "domain",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 1
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "PRIMARY_CONTENT",
+                  "defaultValue": "#[payload]",
+                  "description": "Notification's message",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": false
+                  },
+                  "name": "message",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 2
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "CONTENT",
+                  "description": "Additional properties for the notification",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {"classInformation": {
+                      "implementedInterfaces": [],
+                      "parent": "",
+                      "classname": "java.util.Map",
+                      "hasDefaultConstructor": false,
+                      "isInstantiable": false,
+                      "isFinal": false,
+                      "genericTypes": [
+                        "java.lang.String",
+                        "java.lang.String"
+                      ],
+                      "isInterface": true,
+                      "isAbstract": true,
+                      "isMap": true
+                    }},
+                    "type": "Object",
+                    "fields": [],
+                    "open": {"type": "String"}
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": false
+                  },
+                  "name": "customProperties",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 3
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "Priority of the notification to create. INFO, WARN or ERROR.",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "java.lang.Enum",
+                        "classname": "com.mulesoft.connectors.cloudhub.api.Priority",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": false,
+                        "isMap": false
+                      },
+                      "typeId": "com.mulesoft.connectors.cloudhub.api.Priority",
+                      "enum": {
+                        "values": [
+                          "ERROR",
+                          "INFO",
+                          "WARN"
+                        ],
+                        "type": "[Ljava.lang.String;"
+                      }
+                    },
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "priority",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 4
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "Transaction ID for the Notification",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "transactionId",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 5
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of the configuration to be used to execute this component",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "",
+                        "classname": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": false,
+                        "genericTypes": [],
+                        "isInterface": true,
+                        "isAbstract": true,
+                        "isMap": false
+                      },
+                      "typeId": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider"
+                    },
+                    "type": "Object",
+                    "fields": []
+                  },
+                  "required": true,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": true
+                  },
+                  "name": "config-ref",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 6
+                  },
+                  "allowedStereotypeModels": [{
+                    "parent": {
+                      "namespace": "MULE",
+                      "type": "MODULE_CONFIG"
+                    },
+                    "namespace": "CLOUDHUB",
+                    "type": "CONFIG"
+                  }],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Error Mappings",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 2
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "Set of error mappings",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 12},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "error-mappings",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }},
+                  "sinceMuleVersion": {"version": "4.4.0"}
+                },
+                "type": {
+                  "item": {
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "errorMapping"
+                    },
+                    "type": "Object",
+                    "fields": [
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {
+                            "typeId": "errorTypeMatcher",
+                            "enum": {
+                              "values": [
+                                "ANY",
+                                "REDELIVERY_EXHAUSTED",
+                                "TRANSFORMATION",
+                                "EXPRESSION",
+                                "SECURITY",
+                                "CLIENT_SECURITY",
+                                "SERVER_SECURITY",
+                                "ROUTING",
+                                "CONNECTIVITY",
+                                "RETRY_EXHAUSTED",
+                                "TIMEOUT"
+                              ],
+                              "type": "[Ljava.lang.String;"
+                            }
+                          },
+                          "type": "String"
+                        },
+                        "key": {"name": "source"}
+                      },
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {"typeId": "errorTypeDefinition"},
+                          "type": "String"
+                        },
+                        "key": {
+                          "name": "target",
+                          "required": "true"
+                        }
+                      }
+                    ]
+                  },
+                  "format": "java",
+                  "annotations": {
+                    "typeDsl": {
+                      "allowTopLevelDefinition": false,
+                      "allowInlineDefinition": true
+                    },
+                    "infrastructureType": {},
+                    "description": {"value": "Determines that an error thrown by this operation should be mapped to another"}
+                  },
+                  "type": "Array"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "errorMappings",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Error Mapping",
+                  "query": false,
+                  "text": false,
+                  "order": 7
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Connection",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 3
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "A retry strategy in case of connectivity errors",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 3},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "abstract-reconnection-strategy",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }}
+                },
+                "type": {
+                  "of": [
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "How many reconnection attempts to make"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2",
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "count"}
+                        }
+                      ]
+                    },
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect-forever"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        }
+                      ]
+                    }
+                  ],
+                  "format": "java",
+                  "annotations": {
+                    "infrastructureType": {},
+                    "typeId": "ReconnectionStrategy"
+                  },
+                  "type": "Union"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "reconnectionStrategy",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Advanced",
+                  "query": false,
+                  "text": false,
+                  "order": 8
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            }
+          ],
+          "output": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "outputAttributes": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "supportsStreaming": false,
+          "requiresConnection": true,
+          "blocking": false,
+          "name": "createNotification",
+          "stereotype": {
+            "parent": {
+              "parent": {
+                "namespace": "MULE",
+                "type": "PROCESSOR"
+              },
+              "namespace": "CLOUDHUB",
+              "type": "PROCESSOR"
+            },
+            "namespace": "CLOUDHUB",
+            "type": "CREATE_NOTIFICATION"
+          },
+          "nestedComponents": [],
+          "transactional": false,
+          "notifications": [],
+          "errors": [
+            "CLOUDHUB:CONNECTIVITY",
+            "CLOUDHUB:EXECUTION",
+            "CLOUDHUB:RETRY_EXHAUSTED"
+          ]
+        },
+        {
+          "displayModel": {"displayName": "Get Application"},
+          "semanticTerms": [],
+          "kind": "operation",
+          "executionType": "CPU_LITE",
+          "description": "Retrieves a single application by name.",
+          "modelProperties": {"typeResolversInformation": {
+            "partialTypeKeyResolver": false,
+            "outputResolver": {
+              "resolverName": "Application",
+              "requiresConnection": true,
+              "requiresConfiguration": true
+            },
+            "category": "Application"
+          }},
+          "parameterGroupModels": [
+            {
+              "name": "General",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 1
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of the application",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": true,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "valueProviderModel": {
+                    "partOrder": 1,
+                    "requiresConnection": true,
+                    "isOpen": true,
+                    "providerId": "com.mulesoft.connectors.cloudhub.internal.value.provider.DomainsValueProvider",
+                    "requiresConfiguration": false,
+                    "modelProperties": {},
+                    "parameters": [],
+                    "providerName": "domain"
+                  },
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "domain",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 1
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of the configuration to be used to execute this component",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "",
+                        "classname": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": false,
+                        "genericTypes": [],
+                        "isInterface": true,
+                        "isAbstract": true,
+                        "isMap": false
+                      },
+                      "typeId": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider"
+                    },
+                    "type": "Object",
+                    "fields": []
+                  },
+                  "required": true,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": true
+                  },
+                  "name": "config-ref",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 3
+                  },
+                  "allowedStereotypeModels": [{
+                    "parent": {
+                      "namespace": "MULE",
+                      "type": "MODULE_CONFIG"
+                    },
+                    "namespace": "CLOUDHUB",
+                    "type": "CONFIG"
+                  }],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "Configure if repeatable streams should be used and their behaviour",
+                  "modelProperties": {
+                    "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 2},
+                    "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                      "localPart": "abstract-byte-streaming-strategy",
+                      "prefix": "mule",
+                      "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                    }}
+                  },
+                  "type": {
+                    "of": [
+                      {
+                        "annotations": {
+                          "infrastructureType": {},
+                          "typeId": "repeatable-in-memory-stream"
+                        },
+                        "type": "Object",
+                        "fields": [
+                          {
+                            "annotations": {"description": {"value": "This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize."}},
+                            "model": {
+                              "annotations": {
+                                "default": "512",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "initialBufferSize"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full."}},
+                            "model": {
+                              "annotations": {
+                                "default": "512",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "bufferSizeIncrement"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit."}},
+                            "model": {
+                              "annotations": {
+                                "default": "1024",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "maxBufferSize"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "The unit in which all these attributes are expressed"}},
+                            "model": {
+                              "annotations": {
+                                "default": "KB",
+                                "enum": {
+                                  "values": [
+                                    "BYTE",
+                                    "KB",
+                                    "MB",
+                                    "GB"
+                                  ],
+                                  "type": "[Ljava.lang.String;"
+                                }
+                              },
+                              "type": "String"
+                            },
+                            "key": {"name": "bufferUnit"}
+                          }
+                        ]
+                      },
+                      {
+                        "annotations": {
+                          "QName": {"value": {
+                            "localPart": "repeatable-file-store-stream",
+                            "prefix": "ee",
+                            "namespaceURI": "http://www.mulesoft.org/schema/mule/ee/core"
+                          }},
+                          "infrastructureType": {},
+                          "typeId": "repeatable-file-store-stream"
+                        },
+                        "type": "Object",
+                        "fields": [
+                          {
+                            "annotations": {"description": {"value": "Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk."}},
+                            "model": {
+                              "annotations": {
+                                "default": "512",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "inMemorySize"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "The unit in which maxInMemorySize is expressed"}},
+                            "model": {
+                              "annotations": {
+                                "default": "KB",
+                                "enum": {
+                                  "values": [
+                                    "BYTE",
+                                    "KB",
+                                    "MB",
+                                    "GB"
+                                  ],
+                                  "type": "[Ljava.lang.String;"
+                                }
+                              },
+                              "type": "String"
+                            },
+                            "key": {"name": "bufferUnit"}
+                          }
+                        ]
+                      },
+                      {
+                        "annotations": {
+                          "infrastructureType": {},
+                          "description": {"value": "This configuration allows the input stream to be read only once. It will not allow to seek randomly which will limit the transformations that DW can perform on this stream. Use this option for use cases which just require moving data around from one system to another to get optimum performance."},
+                          "typeId": "non-repeatable-stream"
+                        },
+                        "type": "Object",
+                        "fields": []
+                      }
+                    ],
+                    "format": "java",
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "ByteStreamingStrategy"
+                    },
+                    "type": "Union"
+                  },
+                  "required": false,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": false
+                  },
+                  "name": "streamingStrategy",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 2
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Output",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 2
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "displayModel": {"displayName": "Target Variable"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of a variable on which the operation's output will be placed",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "target",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 4
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Target Value"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "#[payload]",
+                  "description": "An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "REQUIRED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "targetValue",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 5
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Error Mappings",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 3
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "Set of error mappings",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 12},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "error-mappings",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }},
+                  "sinceMuleVersion": {"version": "4.4.0"}
+                },
+                "type": {
+                  "item": {
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "errorMapping"
+                    },
+                    "type": "Object",
+                    "fields": [
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {
+                            "typeId": "errorTypeMatcher",
+                            "enum": {
+                              "values": [
+                                "ANY",
+                                "REDELIVERY_EXHAUSTED",
+                                "TRANSFORMATION",
+                                "EXPRESSION",
+                                "SECURITY",
+                                "CLIENT_SECURITY",
+                                "SERVER_SECURITY",
+                                "ROUTING",
+                                "CONNECTIVITY",
+                                "RETRY_EXHAUSTED",
+                                "TIMEOUT"
+                              ],
+                              "type": "[Ljava.lang.String;"
+                            }
+                          },
+                          "type": "String"
+                        },
+                        "key": {"name": "source"}
+                      },
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {"typeId": "errorTypeDefinition"},
+                          "type": "String"
+                        },
+                        "key": {
+                          "name": "target",
+                          "required": "true"
+                        }
+                      }
+                    ]
+                  },
+                  "format": "java",
+                  "annotations": {
+                    "typeDsl": {
+                      "allowTopLevelDefinition": false,
+                      "allowInlineDefinition": true
+                    },
+                    "infrastructureType": {},
+                    "description": {"value": "Determines that an error thrown by this operation should be mapped to another"}
+                  },
+                  "type": "Array"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "errorMappings",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Error Mapping",
+                  "query": false,
+                  "text": false,
+                  "order": 6
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Connection",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 4
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "A retry strategy in case of connectivity errors",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 3},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "abstract-reconnection-strategy",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }}
+                },
+                "type": {
+                  "of": [
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "How many reconnection attempts to make"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2",
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "count"}
+                        }
+                      ]
+                    },
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect-forever"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        }
+                      ]
+                    }
+                  ],
+                  "format": "java",
+                  "annotations": {
+                    "infrastructureType": {},
+                    "typeId": "ReconnectionStrategy"
+                  },
+                  "type": "Union"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "reconnectionStrategy",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Advanced",
+                  "query": false,
+                  "text": false,
+                  "order": 7
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            }
+          ],
+          "output": {
+            "hasDynamicType": true,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "json",
+              "annotations": {"classInformation": {
+                "implementedInterfaces": ["java.io.Closeable"],
+                "parent": "",
+                "classname": "java.io.InputStream",
+                "hasDefaultConstructor": true,
+                "isInstantiable": false,
+                "isFinal": false,
+                "genericTypes": [],
+                "isInterface": false,
+                "isAbstract": true,
+                "isMap": false
+              }},
+              "type": "Any"
+            }
+          },
+          "outputAttributes": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "supportsStreaming": true,
+          "requiresConnection": true,
+          "blocking": false,
+          "name": "getApplication",
+          "stereotype": {
+            "parent": {
+              "parent": {
+                "namespace": "MULE",
+                "type": "PROCESSOR"
+              },
+              "namespace": "CLOUDHUB",
+              "type": "PROCESSOR"
+            },
+            "namespace": "CLOUDHUB",
+            "type": "GET_APPLICATION"
+          },
+          "nestedComponents": [],
+          "transactional": false,
+          "notifications": [],
+          "errors": [
+            "CLOUDHUB:CONNECTIVITY",
+            "CLOUDHUB:EXECUTION",
+            "CLOUDHUB:RETRY_EXHAUSTED"
+          ]
+        },
+        {
+          "displayModel": {"displayName": "List Applications"},
+          "semanticTerms": [],
+          "kind": "operation",
+          "executionType": "CPU_LITE",
+          "description": "Retrieves all applications in the specified environment.",
+          "modelProperties": {"typeResolversInformation": {
+            "partialTypeKeyResolver": false,
+            "outputResolver": {
+              "resolverName": "Applications",
+              "requiresConnection": true,
+              "requiresConfiguration": true
+            },
+            "category": "Applications"
+          }},
+          "parameterGroupModels": [
+            {
+              "name": "General",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 0
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "displayModel": {"displayName": "Retrieve Log Levels"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "true",
+                  "description": "Whether should retrieve Application log levels",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {"typeId": "boolean"},
+                    "type": "Boolean"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "retrieveLogLevels",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 4
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Retrieve Tracking Settings"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "true",
+                  "description": "Whether should retrieve Application tracking settings",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {"typeId": "boolean"},
+                    "type": "Boolean"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "retrieveTrackingSettings",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 5
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Retrieve IP Addresses"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "true",
+                  "description": "Whether should retrieve Application IP Addresses",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {"typeId": "boolean"},
+                    "type": "Boolean"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "retrieveIpAddresses",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 6
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of the configuration to be used to execute this component",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "",
+                        "classname": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": false,
+                        "genericTypes": [],
+                        "isInterface": true,
+                        "isAbstract": true,
+                        "isMap": false
+                      },
+                      "typeId": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider"
+                    },
+                    "type": "Object",
+                    "fields": []
+                  },
+                  "required": true,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": true
+                  },
+                  "name": "config-ref",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 8
+                  },
+                  "allowedStereotypeModels": [{
+                    "parent": {
+                      "namespace": "MULE",
+                      "type": "MODULE_CONFIG"
+                    },
+                    "namespace": "CLOUDHUB",
+                    "type": "CONFIG"
+                  }],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "Configure if repeatable streams should be used and their behaviour",
+                  "modelProperties": {
+                    "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 2},
+                    "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                      "localPart": "abstract-byte-streaming-strategy",
+                      "prefix": "mule",
+                      "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                    }}
+                  },
+                  "type": {
+                    "of": [
+                      {
+                        "annotations": {
+                          "infrastructureType": {},
+                          "typeId": "repeatable-in-memory-stream"
+                        },
+                        "type": "Object",
+                        "fields": [
+                          {
+                            "annotations": {"description": {"value": "This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize."}},
+                            "model": {
+                              "annotations": {
+                                "default": "512",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "initialBufferSize"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full."}},
+                            "model": {
+                              "annotations": {
+                                "default": "512",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "bufferSizeIncrement"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit."}},
+                            "model": {
+                              "annotations": {
+                                "default": "1024",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "maxBufferSize"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "The unit in which all these attributes are expressed"}},
+                            "model": {
+                              "annotations": {
+                                "default": "KB",
+                                "enum": {
+                                  "values": [
+                                    "BYTE",
+                                    "KB",
+                                    "MB",
+                                    "GB"
+                                  ],
+                                  "type": "[Ljava.lang.String;"
+                                }
+                              },
+                              "type": "String"
+                            },
+                            "key": {"name": "bufferUnit"}
+                          }
+                        ]
+                      },
+                      {
+                        "annotations": {
+                          "QName": {"value": {
+                            "localPart": "repeatable-file-store-stream",
+                            "prefix": "ee",
+                            "namespaceURI": "http://www.mulesoft.org/schema/mule/ee/core"
+                          }},
+                          "infrastructureType": {},
+                          "typeId": "repeatable-file-store-stream"
+                        },
+                        "type": "Object",
+                        "fields": [
+                          {
+                            "annotations": {"description": {"value": "Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk."}},
+                            "model": {
+                              "annotations": {
+                                "default": "512",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "inMemorySize"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "The unit in which maxInMemorySize is expressed"}},
+                            "model": {
+                              "annotations": {
+                                "default": "KB",
+                                "enum": {
+                                  "values": [
+                                    "BYTE",
+                                    "KB",
+                                    "MB",
+                                    "GB"
+                                  ],
+                                  "type": "[Ljava.lang.String;"
+                                }
+                              },
+                              "type": "String"
+                            },
+                            "key": {"name": "bufferUnit"}
+                          }
+                        ]
+                      },
+                      {
+                        "annotations": {
+                          "infrastructureType": {},
+                          "description": {"value": "This configuration allows the input stream to be read only once. It will not allow to seek randomly which will limit the transformations that DW can perform on this stream. Use this option for use cases which just require moving data around from one system to another to get optimum performance."},
+                          "typeId": "non-repeatable-stream"
+                        },
+                        "type": "Object",
+                        "fields": []
+                      }
+                    ],
+                    "format": "java",
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "ByteStreamingStrategy"
+                    },
+                    "type": "Union"
+                  },
+                  "required": false,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": false
+                  },
+                  "name": "streamingStrategy",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 7
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Statistics Information",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 1
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "false",
+                  "description": "Whether should retrieve Application statistics",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {"typeId": "boolean"},
+                    "type": "Boolean"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "retrieveStatistics",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 1
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "1",
+                  "description": "Time of statistics to gather",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "",
+                        "classname": "int",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": true,
+                        "isMap": false
+                      },
+                      "int": {}
+                    },
+                    "type": "Number"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "period",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 2
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "HOURS",
+                  "description": "Time Unit of the period",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "java.lang.Enum",
+                        "classname": "java.util.concurrent.TimeUnit",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": false,
+                        "isMap": false
+                      },
+                      "typeId": "java.util.concurrent.TimeUnit",
+                      "enum": {
+                        "values": [
+                          "NANOSECONDS",
+                          "MICROSECONDS",
+                          "MILLISECONDS",
+                          "SECONDS",
+                          "MINUTES",
+                          "HOURS",
+                          "DAYS"
+                        ],
+                        "type": "[Ljava.lang.String;"
+                      }
+                    },
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "periodTimeUnit",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 3
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Output",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 3
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "displayModel": {"displayName": "Target Variable"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of a variable on which the operation's output will be placed",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "target",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 9
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Target Value"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "#[payload]",
+                  "description": "An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "REQUIRED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "targetValue",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 10
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Error Mappings",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 4
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "Set of error mappings",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 12},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "error-mappings",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }},
+                  "sinceMuleVersion": {"version": "4.4.0"}
+                },
+                "type": {
+                  "item": {
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "errorMapping"
+                    },
+                    "type": "Object",
+                    "fields": [
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {
+                            "typeId": "errorTypeMatcher",
+                            "enum": {
+                              "values": [
+                                "ANY",
+                                "REDELIVERY_EXHAUSTED",
+                                "TRANSFORMATION",
+                                "EXPRESSION",
+                                "SECURITY",
+                                "CLIENT_SECURITY",
+                                "SERVER_SECURITY",
+                                "ROUTING",
+                                "CONNECTIVITY",
+                                "RETRY_EXHAUSTED",
+                                "TIMEOUT"
+                              ],
+                              "type": "[Ljava.lang.String;"
+                            }
+                          },
+                          "type": "String"
+                        },
+                        "key": {"name": "source"}
+                      },
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {"typeId": "errorTypeDefinition"},
+                          "type": "String"
+                        },
+                        "key": {
+                          "name": "target",
+                          "required": "true"
+                        }
+                      }
+                    ]
+                  },
+                  "format": "java",
+                  "annotations": {
+                    "typeDsl": {
+                      "allowTopLevelDefinition": false,
+                      "allowInlineDefinition": true
+                    },
+                    "infrastructureType": {},
+                    "description": {"value": "Determines that an error thrown by this operation should be mapped to another"}
+                  },
+                  "type": "Array"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "errorMappings",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Error Mapping",
+                  "query": false,
+                  "text": false,
+                  "order": 11
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Connection",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 5
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "A retry strategy in case of connectivity errors",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 3},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "abstract-reconnection-strategy",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }}
+                },
+                "type": {
+                  "of": [
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "How many reconnection attempts to make"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2",
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "count"}
+                        }
+                      ]
+                    },
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect-forever"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        }
+                      ]
+                    }
+                  ],
+                  "format": "java",
+                  "annotations": {
+                    "infrastructureType": {},
+                    "typeId": "ReconnectionStrategy"
+                  },
+                  "type": "Union"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "reconnectionStrategy",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Advanced",
+                  "query": false,
+                  "text": false,
+                  "order": 12
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            }
+          ],
+          "output": {
+            "hasDynamicType": true,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "json",
+              "annotations": {"classInformation": {
+                "implementedInterfaces": ["java.io.Closeable"],
+                "parent": "",
+                "classname": "java.io.InputStream",
+                "hasDefaultConstructor": true,
+                "isInstantiable": false,
+                "isFinal": false,
+                "genericTypes": [],
+                "isInterface": false,
+                "isAbstract": true,
+                "isMap": false
+              }},
+              "type": "Any"
+            }
+          },
+          "outputAttributes": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "supportsStreaming": true,
+          "requiresConnection": true,
+          "blocking": false,
+          "name": "listApplications",
+          "stereotype": {
+            "parent": {
+              "parent": {
+                "namespace": "MULE",
+                "type": "PROCESSOR"
+              },
+              "namespace": "CLOUDHUB",
+              "type": "PROCESSOR"
+            },
+            "namespace": "CLOUDHUB",
+            "type": "LIST_APPLICATIONS"
+          },
+          "nestedComponents": [],
+          "transactional": false,
+          "notifications": [],
+          "errors": [
+            "CLOUDHUB:CONNECTIVITY",
+            "CLOUDHUB:EXECUTION",
+            "CLOUDHUB:RETRY_EXHAUSTED"
+          ]
+        },
+        {
+          "displayModel": {"displayName": "List Notifications"},
+          "semanticTerms": [],
+          "kind": "operation",
+          "executionType": "BLOCKING",
+          "description": "Lists all the available notifications for a giver domain.",
+          "modelProperties": {},
+          "parameterGroupModels": [
+            {
+              "name": "General",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 1
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "Name of the application to gather notifications from",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": true,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "valueProviderModel": {
+                    "partOrder": 1,
+                    "requiresConnection": true,
+                    "isOpen": true,
+                    "providerId": "com.mulesoft.connectors.cloudhub.internal.value.provider.DomainsValueProvider",
+                    "requiresConfiguration": false,
+                    "modelProperties": {},
+                    "parameters": [],
+                    "providerName": "domain"
+                  },
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "domain",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 1
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "-1",
+                  "description": "Number of notifications to retrieve. -1 means everything available.",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "",
+                        "classname": "int",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": true,
+                        "isMap": false
+                      },
+                      "int": {}
+                    },
+                    "type": "Number"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "limit",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 2
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "25",
+                  "description": "Size of the page to retrieve per iteration. This only should be changed for performance purposes.",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "",
+                        "classname": "int",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": true,
+                        "isMap": false
+                      },
+                      "int": {}
+                    },
+                    "type": "Number"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "pageSize",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 3
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of the configuration to be used to execute this component",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "",
+                        "classname": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": false,
+                        "genericTypes": [],
+                        "isInterface": true,
+                        "isAbstract": true,
+                        "isMap": false
+                      },
+                      "typeId": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider"
+                    },
+                    "type": "Object",
+                    "fields": []
+                  },
+                  "required": true,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": true
+                  },
+                  "name": "config-ref",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 5
+                  },
+                  "allowedStereotypeModels": [{
+                    "parent": {
+                      "namespace": "MULE",
+                      "type": "MODULE_CONFIG"
+                    },
+                    "namespace": "CLOUDHUB",
+                    "type": "CONFIG"
+                  }],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "Configure if repeatable streams should be used and their behaviour",
+                  "modelProperties": {
+                    "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 2},
+                    "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                      "localPart": "abstract-object-streaming-strategy",
+                      "prefix": "mule",
+                      "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                    }}
+                  },
+                  "type": {
+                    "of": [
+                      {
+                        "annotations": {
+                          "infrastructureType": {},
+                          "typeId": "repeatable-in-memory-iterable"
+                        },
+                        "type": "Object",
+                        "fields": [
+                          {
+                            "annotations": {"description": {"value": "This is the amount of instances that will be initially be allowed to be kept in memory in order to consume the stream and provide random access to it. If the stream contains more data than can fit into this buffer, then it will be expanded according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. Default value is 100 instances."}},
+                            "model": {
+                              "annotations": {
+                                "default": "100",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "initialBufferSize"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "This is by how much will the buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. Default value is 100 instances."}},
+                            "model": {
+                              "annotations": {
+                                "default": "100",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "bufferSizeIncrement"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit."}},
+                            "model": {
+                              "annotations": {
+                                "default": "500",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "maxBufferSize"}
+                          }
+                        ]
+                      },
+                      {
+                        "annotations": {
+                          "QName": {"value": {
+                            "localPart": "repeatable-file-store-iterable",
+                            "prefix": "ee",
+                            "namespaceURI": "http://www.mulesoft.org/schema/mule/ee/core"
+                          }},
+                          "infrastructureType": {},
+                          "typeId": "repeatable-file-store-iterable"
+                        },
+                        "type": "Object",
+                        "fields": [
+                          {
+                            "annotations": {"description": {"value": "This is the maximum amount of instances that will be kept in memory. If more than that is required, then it will start to buffer the content on disk."}},
+                            "model": {
+                              "annotations": {
+                                "default": "100",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "inMemoryObjects"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "The unit in which maxInMemorySize is expressed"}},
+                            "model": {
+                              "annotations": {
+                                "default": "KB",
+                                "enum": {
+                                  "values": [
+                                    "BYTE",
+                                    "KB",
+                                    "MB",
+                                    "GB"
+                                  ],
+                                  "type": "[Ljava.lang.String;"
+                                }
+                              },
+                              "type": "String"
+                            },
+                            "key": {"name": "bufferUnit"}
+                          }
+                        ]
+                      },
+                      {
+                        "annotations": {
+                          "infrastructureType": {},
+                          "description": {"value": "This configuration allows the stream to be read only once. It will not allow to seek randomly which will limit the transformations that DW can perform on this stream. Use this option for use cases which just require moving data around from one system to another to get optimum performance."},
+                          "typeId": "non-repeatable-iterable"
+                        },
+                        "type": "Object",
+                        "fields": []
+                      }
+                    ],
+                    "format": "java",
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "ObjectStreamingStrategy"
+                    },
+                    "type": "Union"
+                  },
+                  "required": false,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": true,
+                    "allowsReferences": false
+                  },
+                  "name": "streamingStrategy",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 4
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Notification Filter",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 2
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "UNREAD",
+                  "description": "Filters the notifications by status. Read, Unread or All.",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "java.lang.Enum",
+                        "classname": "com.mulesoft.connectors.cloudhub.api.NotificationStatus",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": false,
+                        "isMap": false
+                      },
+                      "typeId": "com.mulesoft.connectors.cloudhub.api.NotificationStatus",
+                      "enum": {
+                        "values": [
+                          "READ",
+                          "UNREAD",
+                          "ALL"
+                        ],
+                        "type": "[Ljava.lang.String;"
+                      }
+                    },
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "status",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 6
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "If specified, only return notifications where the message contains this string. (Case Insensitive)",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "search",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 7
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Output",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 3
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "displayModel": {"displayName": "Target Variable"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of a variable on which the operation's output will be placed",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "target",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 8
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "displayModel": {"displayName": "Target Value"},
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "defaultValue": "#[payload]",
+                  "description": "An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": false,
+                  "expressionSupport": "REQUIRED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "targetValue",
+                  "layoutModel": {
+                    "password": false,
+                    "tabName": "Advanced",
+                    "query": false,
+                    "text": false,
+                    "order": 9
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Error Mappings",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 4
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "Set of error mappings",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 12},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "error-mappings",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }},
+                  "sinceMuleVersion": {"version": "4.4.0"}
+                },
+                "type": {
+                  "item": {
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "errorMapping"
+                    },
+                    "type": "Object",
+                    "fields": [
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {
+                            "typeId": "errorTypeMatcher",
+                            "enum": {
+                              "values": [
+                                "ANY",
+                                "REDELIVERY_EXHAUSTED",
+                                "TRANSFORMATION",
+                                "EXPRESSION",
+                                "SECURITY",
+                                "CLIENT_SECURITY",
+                                "SERVER_SECURITY",
+                                "ROUTING",
+                                "CONNECTIVITY",
+                                "RETRY_EXHAUSTED",
+                                "TIMEOUT"
+                              ],
+                              "type": "[Ljava.lang.String;"
+                            }
+                          },
+                          "type": "String"
+                        },
+                        "key": {"name": "source"}
+                      },
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {"typeId": "errorTypeDefinition"},
+                          "type": "String"
+                        },
+                        "key": {
+                          "name": "target",
+                          "required": "true"
+                        }
+                      }
+                    ]
+                  },
+                  "format": "java",
+                  "annotations": {
+                    "typeDsl": {
+                      "allowTopLevelDefinition": false,
+                      "allowInlineDefinition": true
+                    },
+                    "infrastructureType": {},
+                    "description": {"value": "Determines that an error thrown by this operation should be mapped to another"}
+                  },
+                  "type": "Array"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "errorMappings",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Error Mapping",
+                  "query": false,
+                  "text": false,
+                  "order": 10
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Connection",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 5
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "A retry strategy in case of connectivity errors",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 3},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "abstract-reconnection-strategy",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }}
+                },
+                "type": {
+                  "of": [
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "How many reconnection attempts to make"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2",
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "count"}
+                        }
+                      ]
+                    },
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect-forever"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        }
+                      ]
+                    }
+                  ],
+                  "format": "java",
+                  "annotations": {
+                    "infrastructureType": {},
+                    "typeId": "ReconnectionStrategy"
+                  },
+                  "type": "Union"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "reconnectionStrategy",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Advanced",
+                  "query": false,
+                  "text": false,
+                  "order": 11
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            }
+          ],
+          "output": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "item": {"type": "@ref:Notification"},
+              "format": "json",
+              "annotations": {
+                "classInformation": {
+                  "implementedInterfaces": ["org.mule.sdk.api.runtime.streaming.PagingProvider"],
+                  "parent": "",
+                  "classname": "org.mule.runtime.extension.api.runtime.streaming.PagingProvider",
+                  "hasDefaultConstructor": false,
+                  "isInstantiable": false,
+                  "isFinal": false,
+                  "genericTypes": [],
+                  "isInterface": true,
+                  "isAbstract": true,
+                  "isMap": false
+                },
+                "typeId": "Notifications"
+              },
+              "type": "Array"
+            }
+          },
+          "outputAttributes": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "supportsStreaming": true,
+          "requiresConnection": true,
+          "blocking": true,
+          "name": "listNotifications",
+          "stereotype": {
+            "parent": {
+              "parent": {
+                "namespace": "MULE",
+                "type": "PROCESSOR"
+              },
+              "namespace": "CLOUDHUB",
+              "type": "PROCESSOR"
+            },
+            "namespace": "CLOUDHUB",
+            "type": "LIST_NOTIFICATIONS"
+          },
+          "nestedComponents": [],
+          "transactional": false,
+          "notifications": [],
+          "errors": [
+            "CLOUDHUB:CONNECTIVITY",
+            "CLOUDHUB:EXECUTION"
+          ]
+        },
+        {
+          "semanticTerms": [],
+          "kind": "operation",
+          "executionType": "CPU_LITE",
+          "description": "Marks a notification as Read or Unread",
+          "modelProperties": {},
+          "parameterGroupModels": [
+            {
+              "name": "General",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 1
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "ID of the notification",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "type": "String"
+                  },
+                  "required": true,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "notificationId",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 1
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "Action to do. Mark as Read or Unread",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "java.lang.Enum",
+                        "classname": "com.mulesoft.connectors.cloudhub.api.MarkStatus",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": false,
+                        "isMap": false
+                      },
+                      "typeId": "com.mulesoft.connectors.cloudhub.api.MarkStatus",
+                      "enum": {
+                        "values": [
+                          "READ",
+                          "UNREAD"
+                        ],
+                        "type": "[Ljava.lang.String;"
+                      }
+                    },
+                    "type": "String"
+                  },
+                  "required": true,
+                  "expressionSupport": "SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": false
+                  },
+                  "name": "markAs",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 2
+                  },
+                  "allowedStereotypeModels": [],
+                  "isComponentId": false
+                },
+                {
+                  "semanticTerms": [],
+                  "role": "BEHAVIOUR",
+                  "description": "The name of the configuration to be used to execute this component",
+                  "modelProperties": {},
+                  "type": {
+                    "format": "java",
+                    "annotations": {
+                      "classInformation": {
+                        "implementedInterfaces": [],
+                        "parent": "",
+                        "classname": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": false,
+                        "genericTypes": [],
+                        "isInterface": true,
+                        "isAbstract": true,
+                        "isMap": false
+                      },
+                      "typeId": "org.mule.runtime.extension.api.runtime.config.ConfigurationProvider"
+                    },
+                    "type": "Object",
+                    "fields": []
+                  },
+                  "required": true,
+                  "expressionSupport": "NOT_SUPPORTED",
+                  "fieldValueProviderModels": [],
+                  "hasDynamicType": false,
+                  "isConfigOverride": false,
+                  "dslConfiguration": {
+                    "allowTopLevelDefinition": false,
+                    "allowsInlineDefinition": false,
+                    "allowsReferences": true
+                  },
+                  "name": "config-ref",
+                  "layoutModel": {
+                    "password": false,
+                    "query": false,
+                    "text": false,
+                    "order": 3
+                  },
+                  "allowedStereotypeModels": [{
+                    "parent": {
+                      "namespace": "MULE",
+                      "type": "MODULE_CONFIG"
+                    },
+                    "namespace": "CLOUDHUB",
+                    "type": "CONFIG"
+                  }],
+                  "isComponentId": false
+                }
+              ],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Error Mappings",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 2
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "Set of error mappings",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 12},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "error-mappings",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }},
+                  "sinceMuleVersion": {"version": "4.4.0"}
+                },
+                "type": {
+                  "item": {
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "errorMapping"
+                    },
+                    "type": "Object",
+                    "fields": [
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {
+                            "typeId": "errorTypeMatcher",
+                            "enum": {
+                              "values": [
+                                "ANY",
+                                "REDELIVERY_EXHAUSTED",
+                                "TRANSFORMATION",
+                                "EXPRESSION",
+                                "SECURITY",
+                                "CLIENT_SECURITY",
+                                "SERVER_SECURITY",
+                                "ROUTING",
+                                "CONNECTIVITY",
+                                "RETRY_EXHAUSTED",
+                                "TIMEOUT"
+                              ],
+                              "type": "[Ljava.lang.String;"
+                            }
+                          },
+                          "type": "String"
+                        },
+                        "key": {"name": "source"}
+                      },
+                      {
+                        "model": {
+                          "format": {
+                            "validMimeTypes": ["text/plain"],
+                            "id": "text",
+                            "label": "Text"
+                          },
+                          "annotations": {"typeId": "errorTypeDefinition"},
+                          "type": "String"
+                        },
+                        "key": {
+                          "name": "target",
+                          "required": "true"
+                        }
+                      }
+                    ]
+                  },
+                  "format": "java",
+                  "annotations": {
+                    "typeDsl": {
+                      "allowTopLevelDefinition": false,
+                      "allowInlineDefinition": true
+                    },
+                    "infrastructureType": {},
+                    "description": {"value": "Determines that an error thrown by this operation should be mapped to another"}
+                  },
+                  "type": "Array"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "errorMappings",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Error Mapping",
+                  "query": false,
+                  "text": false,
+                  "order": 4
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            },
+            {
+              "name": "Connection",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 3
+              },
+              "description": "",
+              "modelProperties": {},
+              "parameters": [{
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "A retry strategy in case of connectivity errors",
+                "modelProperties": {
+                  "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 3},
+                  "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                    "localPart": "abstract-reconnection-strategy",
+                    "prefix": "mule",
+                    "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                  }}
+                },
+                "type": {
+                  "of": [
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "How many reconnection attempts to make"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2",
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "count"}
+                        }
+                      ]
+                    },
+                    {
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "reconnect-forever"
+                      },
+                      "type": "Object",
+                      "fields": [
+                        {
+                          "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                          "model": {
+                            "annotations": {
+                              "default": "2000",
+                              "classInformation": {
+                                "implementedInterfaces": ["java.lang.Comparable"],
+                                "parent": "java.lang.Number",
+                                "classname": "java.lang.Long",
+                                "hasDefaultConstructor": false,
+                                "isInstantiable": false,
+                                "isFinal": true,
+                                "genericTypes": [],
+                                "isInterface": false,
+                                "isAbstract": false,
+                                "isMap": false
+                              },
+                              "int": {}
+                            },
+                            "type": "Number"
+                          },
+                          "key": {"name": "frequency"}
+                        },
+                        {
+                          "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                          "model": {
+                            "annotations": {"default": "true"},
+                            "type": "Boolean"
+                          },
+                          "key": {"name": "blocking"}
+                        }
+                      ]
+                    }
+                  ],
+                  "format": "java",
+                  "annotations": {
+                    "infrastructureType": {},
+                    "typeId": "ReconnectionStrategy"
+                  },
+                  "type": "Union"
+                },
+                "required": false,
+                "expressionSupport": "NOT_SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": true,
+                  "allowsReferences": false
+                },
+                "name": "reconnectionStrategy",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Advanced",
+                  "query": false,
+                  "text": false,
+                  "order": 5
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }],
+              "exclusiveParametersModels": [],
+              "showInDsl": false
+            }
+          ],
+          "output": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "outputAttributes": {
+            "hasDynamicType": false,
+            "description": "",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "Void"
+            }
+          },
+          "supportsStreaming": false,
+          "requiresConnection": true,
+          "blocking": false,
+          "name": "markNotification",
+          "stereotype": {
+            "parent": {
+              "parent": {
+                "namespace": "MULE",
+                "type": "PROCESSOR"
+              },
+              "namespace": "CLOUDHUB",
+              "type": "PROCESSOR"
+            },
+            "namespace": "CLOUDHUB",
+            "type": "MARK_NOTIFICATION"
+          },
+          "nestedComponents": [],
+          "transactional": false,
+          "notifications": [],
+          "errors": [
+            "CLOUDHUB:CONNECTIVITY",
+            "CLOUDHUB:EXECUTION",
+            "CLOUDHUB:RETRY_EXHAUSTED"
+          ]
+        }
+      ],
+      "messageSources": [],
+      "name": "config",
+      "description": "Default configuration",
+      "modelProperties": {"requiredForMetadata": {"requiredParameters": ["name"]}},
+      "stereotype": {
+        "parent": {
+          "namespace": "MULE",
+          "type": "MODULE_CONFIG"
+        },
+        "namespace": "CLOUDHUB",
+        "type": "CONFIG"
+      },
+      "parameterGroupModels": [{
+        "name": "General",
+        "layoutModel": {
+          "password": false,
+          "query": false,
+          "text": false,
+          "order": 1
+        },
+        "description": "",
+        "modelProperties": {},
+        "parameters": [
+          {
+            "semanticTerms": [],
+            "role": "BEHAVIOUR",
+            "description": "The identifier of this element used to reference it in other components",
+            "modelProperties": {},
+            "type": {
+              "format": "java",
+              "type": "String"
+            },
+            "required": true,
+            "expressionSupport": "NOT_SUPPORTED",
+            "fieldValueProviderModels": [],
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": false,
+              "allowsReferences": false
+            },
+            "name": "name",
+            "layoutModel": {
+              "password": false,
+              "query": false,
+              "text": false,
+              "order": 2
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": true
+          },
+          {
+            "semanticTerms": [],
+            "role": "BEHAVIOUR",
+            "description": "Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit.",
+            "modelProperties": {
+              "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 4},
+              "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                "localPart": "expiration-policy",
+                "prefix": "mule",
+                "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+              }}
+            },
+            "type": {
+              "format": "java",
+              "annotations": {
+                "typeDsl": {
+                  "allowTopLevelDefinition": false,
+                  "allowInlineDefinition": true
+                },
+                "infrastructureType": {},
+                "classInformation": {
+                  "implementedInterfaces": [],
+                  "parent": "",
+                  "classname": "org.mule.runtime.extension.api.runtime.ExpirationPolicy",
+                  "hasDefaultConstructor": false,
+                  "isInstantiable": false,
+                  "isFinal": false,
+                  "genericTypes": [],
+                  "isInterface": true,
+                  "isAbstract": true,
+                  "isMap": false
+                },
+                "description": {"value": "Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit."},
+                "typeId": "org.mule.runtime.extension.api.runtime.ExpirationPolicy"
+              },
+              "type": "Object",
+              "fields": [
+                {
+                  "annotations": {
+                    "description": {"value": "A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration"},
+                    "expressionSupport": {"value": "NOT_SUPPORTED"}
+                  },
+                  "model": {
+                    "annotations": {
+                      "default": "5",
+                      "classInformation": {
+                        "implementedInterfaces": ["java.lang.Comparable"],
+                        "parent": "java.lang.Number",
+                        "classname": "java.lang.Long",
+                        "hasDefaultConstructor": false,
+                        "isInstantiable": false,
+                        "isFinal": true,
+                        "genericTypes": [],
+                        "isInterface": false,
+                        "isAbstract": false,
+                        "isMap": false
+                      },
+                      "int": {}
+                    },
+                    "type": "Number"
+                  },
+                  "key": {"name": "maxIdleTime"}
+                },
+                {
+                  "annotations": {
+                    "description": {"value": "A time unit that qualifies the maxIdleTime attribute"},
+                    "expressionSupport": {"value": "NOT_SUPPORTED"}
+                  },
+                  "model": {
+                    "annotations": {
+                      "default": "MINUTES",
+                      "enum": {
+                        "values": [
+                          "NANOSECONDS",
+                          "MICROSECONDS",
+                          "MILLISECONDS",
+                          "SECONDS",
+                          "MINUTES",
+                          "HOURS",
+                          "DAYS"
+                        ],
+                        "type": "[Ljava.lang.String;"
+                      }
+                    },
+                    "type": "String"
+                  },
+                  "key": {"name": "timeUnit"}
+                }
+              ]
+            },
+            "required": false,
+            "expressionSupport": "NOT_SUPPORTED",
+            "fieldValueProviderModels": [],
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": true,
+              "allowsReferences": false
+            },
+            "name": "expirationPolicy",
+            "layoutModel": {
+              "password": false,
+              "tabName": "Advanced",
+              "query": false,
+              "text": false,
+              "order": 1
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": false
+          }
+        ],
+        "exclusiveParametersModels": [],
+        "showInDsl": false
+      }],
+      "connectionProviders": [{
+        "externalLibraryModels": [],
+        "semanticTerms": [],
+        "connectionManagementType": "CACHED",
+        "supportsConnectivityTesting": true,
+        "name": "connection",
+        "description": "Connection Provider that provides CloudHubConnection.",
+        "modelProperties": {"requiredForMetadata": {"requiredParameters": [
+          "username",
+          "password",
+          "environment",
+          "anypointPlatformUrl"
+        ]}},
+        "stereotype": {
+          "parent": {
+            "namespace": "MULE",
+            "type": "CONNECTION"
+          },
+          "namespace": "CLOUDHUB",
+          "type": "CONNECTION"
+        },
+        "parameterGroupModels": [
+          {
+            "name": "General",
+            "layoutModel": {
+              "password": false,
+              "query": false,
+              "text": false,
+              "order": 1
+            },
+            "description": "",
+            "modelProperties": {},
+            "parameters": [
+              {
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "Username of the Anypoint Platform Account",
+                "modelProperties": {},
+                "type": {
+                  "format": "java",
+                  "type": "String"
+                },
+                "required": true,
+                "expressionSupport": "SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": false,
+                  "allowsReferences": false
+                },
+                "name": "username",
+                "layoutModel": {
+                  "password": false,
+                  "query": false,
+                  "text": false,
+                  "order": 1
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              },
+              {
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "Password of the Anypoint Platform Account",
+                "modelProperties": {},
+                "type": {
+                  "format": "java",
+                  "type": "String"
+                },
+                "required": true,
+                "expressionSupport": "SUPPORTED",
+                "fieldValueProviderModels": [],
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": false,
+                  "allowsReferences": false
+                },
+                "name": "password",
+                "layoutModel": {
+                  "password": true,
+                  "query": false,
+                  "text": false,
+                  "order": 2
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              },
+              {
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "description": "Platform Environment to use. It is Optional, and by default will be used the one defined as Default in the platform.",
+                "modelProperties": {},
+                "type": {
+                  "format": "java",
+                  "type": "String"
+                },
+                "required": false,
+                "expressionSupport": "SUPPORTED",
+                "fieldValueProviderModels": [],
+                "valueProviderModel": {
+                  "partOrder": 1,
+                  "requiresConnection": false,
+                  "isOpen": true,
+                  "providerId": "com.mulesoft.connectors.cloudhub.internal.value.provider.EnvironmentsValueProvider",
+                  "requiresConfiguration": false,
+                  "modelProperties": {},
+                  "parameters": [
+                    {
+                      "extractionExpression": "password",
+                      "name": "password",
+                      "required": true
+                    },
+                    {
+                      "extractionExpression": "username",
+                      "name": "username",
+                      "required": true
+                    },
+                    {
+                      "extractionExpression": "anypointPlatformUrl",
+                      "name": "anypointPlatformUrl",
+                      "required": true
+                    }
+                  ],
+                  "providerName": "environment"
+                },
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": false,
+                  "allowsReferences": false
+                },
+                "name": "environment",
+                "layoutModel": {
+                  "password": false,
+                  "query": false,
+                  "text": false,
+                  "order": 3
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              },
+              {
+                "displayModel": {"displayName": "Anypoint Platform URL"},
+                "semanticTerms": [],
+                "role": "BEHAVIOUR",
+                "defaultValue": "https://anypoint.mulesoft.com",
+                "description": "This is used to change between the US and EU Anypoint Platform if is required.",
+                "modelProperties": {},
+                "type": {
+                  "format": "java",
+                  "type": "String"
+                },
+                "required": false,
+                "expressionSupport": "SUPPORTED",
+                "fieldValueProviderModels": [],
+                "valueProviderModel": {
+                  "partOrder": 1,
+                  "requiresConnection": false,
+                  "isOpen": true,
+                  "providerId": "com.mulesoft.connectors.cloudhub.internal.value.provider.AnypointPlatformUrlProvider",
+                  "requiresConfiguration": false,
+                  "modelProperties": {},
+                  "parameters": [],
+                  "providerName": "anypointPlatformUrl"
+                },
+                "hasDynamicType": false,
+                "isConfigOverride": false,
+                "dslConfiguration": {
+                  "allowTopLevelDefinition": false,
+                  "allowsInlineDefinition": false,
+                  "allowsReferences": false
+                },
+                "name": "anypointPlatformUrl",
+                "layoutModel": {
+                  "password": false,
+                  "tabName": "Advanced",
+                  "query": false,
+                  "text": false,
+                  "order": 4
+                },
+                "allowedStereotypeModels": [],
+                "isComponentId": false
+              }
+            ],
+            "exclusiveParametersModels": [],
+            "showInDsl": false
+          },
+          {
+            "name": "Connection",
+            "layoutModel": {
+              "password": false,
+              "query": false,
+              "text": false,
+              "order": 2
+            },
+            "description": "",
+            "modelProperties": {},
+            "parameters": [{
+              "semanticTerms": [],
+              "role": "BEHAVIOUR",
+              "description": "When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy",
+              "modelProperties": {
+                "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 3},
+                "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                  "localPart": "reconnection",
+                  "prefix": "mule",
+                  "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+                }}
+              },
+              "type": {
+                "format": "java",
+                "annotations": {
+                  "infrastructureType": {},
+                  "typeId": "Reconnection"
+                },
+                "type": "Object",
+                "fields": [
+                  {
+                    "annotations": {"description": {"value": "When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy"}},
+                    "model": {
+                      "annotations": {"default": "false"},
+                      "type": "Boolean"
+                    },
+                    "key": {"name": "failsDeployment"}
+                  },
+                  {
+                    "annotations": {"description": {"value": "The reconnection strategy to use"}},
+                    "model": {
+                      "of": [
+                        {
+                          "annotations": {
+                            "infrastructureType": {},
+                            "typeId": "reconnect"
+                          },
+                          "type": "Object",
+                          "fields": [
+                            {
+                              "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                              "model": {
+                                "annotations": {
+                                  "default": "2000",
+                                  "classInformation": {
+                                    "implementedInterfaces": ["java.lang.Comparable"],
+                                    "parent": "java.lang.Number",
+                                    "classname": "java.lang.Long",
+                                    "hasDefaultConstructor": false,
+                                    "isInstantiable": false,
+                                    "isFinal": true,
+                                    "genericTypes": [],
+                                    "isInterface": false,
+                                    "isAbstract": false,
+                                    "isMap": false
+                                  },
+                                  "int": {}
+                                },
+                                "type": "Number"
+                              },
+                              "key": {"name": "frequency"}
+                            },
+                            {
+                              "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                              "model": {
+                                "annotations": {"default": "true"},
+                                "type": "Boolean"
+                              },
+                              "key": {"name": "blocking"}
+                            },
+                            {
+                              "annotations": {"description": {"value": "How many reconnection attempts to make"}},
+                              "model": {
+                                "annotations": {
+                                  "default": "2",
+                                  "int": {}
+                                },
+                                "type": "Number"
+                              },
+                              "key": {"name": "count"}
+                            }
+                          ]
+                        },
+                        {
+                          "annotations": {
+                            "infrastructureType": {},
+                            "typeId": "reconnect-forever"
+                          },
+                          "type": "Object",
+                          "fields": [
+                            {
+                              "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                              "model": {
+                                "annotations": {
+                                  "default": "2000",
+                                  "classInformation": {
+                                    "implementedInterfaces": ["java.lang.Comparable"],
+                                    "parent": "java.lang.Number",
+                                    "classname": "java.lang.Long",
+                                    "hasDefaultConstructor": false,
+                                    "isInstantiable": false,
+                                    "isFinal": true,
+                                    "genericTypes": [],
+                                    "isInterface": false,
+                                    "isAbstract": false,
+                                    "isMap": false
+                                  },
+                                  "int": {}
+                                },
+                                "type": "Number"
+                              },
+                              "key": {"name": "frequency"}
+                            },
+                            {
+                              "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                              "model": {
+                                "annotations": {"default": "true"},
+                                "type": "Boolean"
+                              },
+                              "key": {"name": "blocking"}
+                            }
+                          ]
+                        }
+                      ],
+                      "annotations": {
+                        "infrastructureType": {},
+                        "typeId": "ReconnectionStrategy"
+                      },
+                      "type": "Union"
+                    },
+                    "key": {"name": "reconnectionStrategy"}
+                  }
+                ]
+              },
+              "required": false,
+              "expressionSupport": "NOT_SUPPORTED",
+              "fieldValueProviderModels": [],
+              "hasDynamicType": false,
+              "isConfigOverride": false,
+              "dslConfiguration": {
+                "allowTopLevelDefinition": false,
+                "allowsInlineDefinition": true,
+                "allowsReferences": false
+              },
+              "name": "reconnection",
+              "layoutModel": {
+                "password": false,
+                "tabName": "Advanced",
+                "query": false,
+                "text": false,
+                "order": 5
+              },
+              "allowedStereotypeModels": [],
+              "isComponentId": false
+            }],
+            "exclusiveParametersModels": [],
+            "showInDsl": false
+          }
+        ]
+      }]
+    }],
+    "externalLibraries": [],
+    "description": "Connector that provides the capability of Create and List Notifications and retrieve the status of created applications on CloudHub.",
+    "resources": [],
+    "subTypes": [],
+    "modelProperties": {},
+    "constructs": [],
+    "connectionProviders": [{
+      "externalLibraryModels": [],
+      "semanticTerms": [],
+      "connectionManagementType": "CACHED",
+      "supportsConnectivityTesting": true,
+      "name": "connection",
+      "description": "Connection Provider that provides CloudHubConnection.",
+      "modelProperties": {"requiredForMetadata": {"requiredParameters": [
+        "username",
+        "password",
+        "environment",
+        "anypointPlatformUrl"
+      ]}},
+      "stereotype": {
+        "parent": {
+          "namespace": "MULE",
+          "type": "CONNECTION"
+        },
+        "namespace": "CLOUDHUB",
+        "type": "CONNECTION"
+      },
+      "parameterGroupModels": [
+        {
+          "name": "General",
+          "layoutModel": {
+            "password": false,
+            "query": false,
+            "text": false,
+            "order": 1
+          },
+          "description": "",
+          "modelProperties": {},
+          "parameters": [
+            {
+              "semanticTerms": [],
+              "role": "BEHAVIOUR",
+              "description": "Username of the Anypoint Platform Account",
+              "modelProperties": {},
+              "type": {
+                "format": "java",
+                "type": "String"
+              },
+              "required": true,
+              "expressionSupport": "SUPPORTED",
+              "fieldValueProviderModels": [],
+              "hasDynamicType": false,
+              "isConfigOverride": false,
+              "dslConfiguration": {
+                "allowTopLevelDefinition": false,
+                "allowsInlineDefinition": false,
+                "allowsReferences": false
+              },
+              "name": "username",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 1
+              },
+              "allowedStereotypeModels": [],
+              "isComponentId": false
+            },
+            {
+              "semanticTerms": [],
+              "role": "BEHAVIOUR",
+              "description": "Password of the Anypoint Platform Account",
+              "modelProperties": {},
+              "type": {
+                "format": "java",
+                "type": "String"
+              },
+              "required": true,
+              "expressionSupport": "SUPPORTED",
+              "fieldValueProviderModels": [],
+              "hasDynamicType": false,
+              "isConfigOverride": false,
+              "dslConfiguration": {
+                "allowTopLevelDefinition": false,
+                "allowsInlineDefinition": false,
+                "allowsReferences": false
+              },
+              "name": "password",
+              "layoutModel": {
+                "password": true,
+                "query": false,
+                "text": false,
+                "order": 2
+              },
+              "allowedStereotypeModels": [],
+              "isComponentId": false
+            },
+            {
+              "semanticTerms": [],
+              "role": "BEHAVIOUR",
+              "description": "Platform Environment to use. It is Optional, and by default will be used the one defined as Default in the platform.",
+              "modelProperties": {},
+              "type": {
+                "format": "java",
+                "type": "String"
+              },
+              "required": false,
+              "expressionSupport": "SUPPORTED",
+              "fieldValueProviderModels": [],
+              "valueProviderModel": {
+                "partOrder": 1,
+                "requiresConnection": false,
+                "isOpen": true,
+                "providerId": "com.mulesoft.connectors.cloudhub.internal.value.provider.EnvironmentsValueProvider",
+                "requiresConfiguration": false,
+                "modelProperties": {},
+                "parameters": [
+                  {
+                    "extractionExpression": "password",
+                    "name": "password",
+                    "required": true
+                  },
+                  {
+                    "extractionExpression": "username",
+                    "name": "username",
+                    "required": true
+                  },
+                  {
+                    "extractionExpression": "anypointPlatformUrl",
+                    "name": "anypointPlatformUrl",
+                    "required": true
+                  }
+                ],
+                "providerName": "environment"
+              },
+              "hasDynamicType": false,
+              "isConfigOverride": false,
+              "dslConfiguration": {
+                "allowTopLevelDefinition": false,
+                "allowsInlineDefinition": false,
+                "allowsReferences": false
+              },
+              "name": "environment",
+              "layoutModel": {
+                "password": false,
+                "query": false,
+                "text": false,
+                "order": 3
+              },
+              "allowedStereotypeModels": [],
+              "isComponentId": false
+            },
+            {
+              "displayModel": {"displayName": "Anypoint Platform URL"},
+              "semanticTerms": [],
+              "role": "BEHAVIOUR",
+              "defaultValue": "https://anypoint.mulesoft.com",
+              "description": "This is used to change between the US and EU Anypoint Platform if is required.",
+              "modelProperties": {},
+              "type": {
+                "format": "java",
+                "type": "String"
+              },
+              "required": false,
+              "expressionSupport": "SUPPORTED",
+              "fieldValueProviderModels": [],
+              "valueProviderModel": {
+                "partOrder": 1,
+                "requiresConnection": false,
+                "isOpen": true,
+                "providerId": "com.mulesoft.connectors.cloudhub.internal.value.provider.AnypointPlatformUrlProvider",
+                "requiresConfiguration": false,
+                "modelProperties": {},
+                "parameters": [],
+                "providerName": "anypointPlatformUrl"
+              },
+              "hasDynamicType": false,
+              "isConfigOverride": false,
+              "dslConfiguration": {
+                "allowTopLevelDefinition": false,
+                "allowsInlineDefinition": false,
+                "allowsReferences": false
+              },
+              "name": "anypointPlatformUrl",
+              "layoutModel": {
+                "password": false,
+                "tabName": "Advanced",
+                "query": false,
+                "text": false,
+                "order": 4
+              },
+              "allowedStereotypeModels": [],
+              "isComponentId": false
+            }
+          ],
+          "exclusiveParametersModels": [],
+          "showInDsl": false
+        },
+        {
+          "name": "Connection",
+          "layoutModel": {
+            "password": false,
+            "query": false,
+            "text": false,
+            "order": 2
+          },
+          "description": "",
+          "modelProperties": {},
+          "parameters": [{
+            "semanticTerms": [],
+            "role": "BEHAVIOUR",
+            "description": "When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy",
+            "modelProperties": {
+              "org.mule.runtime.extension.api.property.InfrastructureParameterModelProperty": {"sequence": 3},
+              "org.mule.runtime.extension.api.property.QNameModelProperty": {"value": {
+                "localPart": "reconnection",
+                "prefix": "mule",
+                "namespaceURI": "http://www.mulesoft.org/schema/mule/core"
+              }}
+            },
+            "type": {
+              "format": "java",
+              "annotations": {
+                "infrastructureType": {},
+                "typeId": "Reconnection"
+              },
+              "type": "Object",
+              "fields": [
+                {
+                  "annotations": {"description": {"value": "When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy"}},
+                  "model": {
+                    "annotations": {"default": "false"},
+                    "type": "Boolean"
+                  },
+                  "key": {"name": "failsDeployment"}
+                },
+                {
+                  "annotations": {"description": {"value": "The reconnection strategy to use"}},
+                  "model": {
+                    "of": [
+                      {
+                        "annotations": {
+                          "infrastructureType": {},
+                          "typeId": "reconnect"
+                        },
+                        "type": "Object",
+                        "fields": [
+                          {
+                            "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                            "model": {
+                              "annotations": {
+                                "default": "2000",
+                                "classInformation": {
+                                  "implementedInterfaces": ["java.lang.Comparable"],
+                                  "parent": "java.lang.Number",
+                                  "classname": "java.lang.Long",
+                                  "hasDefaultConstructor": false,
+                                  "isInstantiable": false,
+                                  "isFinal": true,
+                                  "genericTypes": [],
+                                  "isInterface": false,
+                                  "isAbstract": false,
+                                  "isMap": false
+                                },
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "frequency"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                            "model": {
+                              "annotations": {"default": "true"},
+                              "type": "Boolean"
+                            },
+                            "key": {"name": "blocking"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "How many reconnection attempts to make"}},
+                            "model": {
+                              "annotations": {
+                                "default": "2",
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "count"}
+                          }
+                        ]
+                      },
+                      {
+                        "annotations": {
+                          "infrastructureType": {},
+                          "typeId": "reconnect-forever"
+                        },
+                        "type": "Object",
+                        "fields": [
+                          {
+                            "annotations": {"description": {"value": "How often (in ms) to reconnect"}},
+                            "model": {
+                              "annotations": {
+                                "default": "2000",
+                                "classInformation": {
+                                  "implementedInterfaces": ["java.lang.Comparable"],
+                                  "parent": "java.lang.Number",
+                                  "classname": "java.lang.Long",
+                                  "hasDefaultConstructor": false,
+                                  "isInstantiable": false,
+                                  "isFinal": true,
+                                  "genericTypes": [],
+                                  "isInterface": false,
+                                  "isAbstract": false,
+                                  "isMap": false
+                                },
+                                "int": {}
+                              },
+                              "type": "Number"
+                            },
+                            "key": {"name": "frequency"}
+                          },
+                          {
+                            "annotations": {"description": {"value": "If false, the reconnection strategy will run in a separate, non-blocking thread"}},
+                            "model": {
+                              "annotations": {"default": "true"},
+                              "type": "Boolean"
+                            },
+                            "key": {"name": "blocking"}
+                          }
+                        ]
+                      }
+                    ],
+                    "annotations": {
+                      "infrastructureType": {},
+                      "typeId": "ReconnectionStrategy"
+                    },
+                    "type": "Union"
+                  },
+                  "key": {"name": "reconnectionStrategy"}
+                }
+              ]
+            },
+            "required": false,
+            "expressionSupport": "NOT_SUPPORTED",
+            "fieldValueProviderModels": [],
+            "hasDynamicType": false,
+            "isConfigOverride": false,
+            "dslConfiguration": {
+              "allowTopLevelDefinition": false,
+              "allowsInlineDefinition": true,
+              "allowsReferences": false
+            },
+            "name": "reconnection",
+            "layoutModel": {
+              "password": false,
+              "tabName": "Advanced",
+              "query": false,
+              "text": false,
+              "order": 5
+            },
+            "allowedStereotypeModels": [],
+            "isComponentId": false
+          }],
+          "exclusiveParametersModels": [],
+          "showInDsl": false
+        }
+      ]
+    }],
+    "version": "1.0.1",
+    "privilegedArtifacts": [],
+    "importedTypes": [],
+    "xmlDsl": {
+      "schemaVersion": "1.0.1",
+      "prefix": "cloudhub",
+      "schemaLocation": "http://www.mulesoft.org/schema/mule/cloudhub/current/mule-cloudhub.xsd",
+      "namespace": "http://www.mulesoft.org/schema/mule/cloudhub",
+      "xsdFileName": "mule-cloudhub.xsd"
+    },
+    "operations": [],
+    "vendor": "Mulesoft",
+    "name": "CloudHub",
+    "privilegedPackages": [],
+    "category": "SELECT",
+    "notifications": [],
+    "errors": [
+      {
+        "parent": "MULE:ANY",
+        "error": "MULE:CONNECTIVITY",
+        "handleable": true
+      },
+      {
+        "error": "MULE:ANY",
+        "handleable": true
+      },
+      {
+        "parent": "CLOUDHUB:CONNECTIVITY",
+        "error": "CLOUDHUB:INVALID_CREDENTIALS",
+        "handleable": true
+      },
+      {
+        "parent": "MULE:CONNECTIVITY",
+        "error": "CLOUDHUB:CONNECTIVITY",
+        "handleable": true
+      },
+      {
+        "parent": "MULE:RETRY_EXHAUSTED",
+        "error": "CLOUDHUB:RETRY_EXHAUSTED",
+        "handleable": true
+      },
+      {
+        "parent": "MULE:ANY",
+        "error": "MULE:RETRY_EXHAUSTED",
+        "handleable": true
+      },
+      {
+        "parent": "MULE:ANY",
+        "error": "CLOUDHUB:EXECUTION",
+        "handleable": true
+      }
+    ]
+  }
+}

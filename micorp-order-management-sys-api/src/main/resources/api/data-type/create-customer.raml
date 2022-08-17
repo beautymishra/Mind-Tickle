@@ -1,0 +1,26 @@
+#%RAML 1.0 DataType
+displayName: Customer
+description: defines customer data types
+
+type: object
+properties:
+  firstName:
+    type: string
+    required: true
+    displayName: firstName
+    example: "John"
+  lastName:
+    type: string
+    required: true
+    displayName: lastName
+    example: "Doe"
+  address:
+    type: string
+    required: true
+    displayName: address
+    example: "1234 Main St San Jose 12345"
+  orderId:
+    type: string
+    required: true
+    displayName: orderId
+    example: "a003k00000TudZ7AAJ"

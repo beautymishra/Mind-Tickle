@@ -1,0 +1,40 @@
+#%RAML 1.0
+title: MiCorp-order-management-prc-api
+description: The process API is extracting data from the incoming request object and invoking System API.
+version: v1
+protocols:
+  - HTTP
+mediaType: 
+- application/json
+
+types:
+  orderRequest: !include data-type/create-order-request.raml
+
+securitySchemes:
+  security: !include security-scheme/customSecurityScheme.raml
+securedBy:
+  - security
+
+/order:
+  post:
+    description: Creates an Order object,Customer object and Item objects in Salesforce.
+    body:
+      application/json:
+        type: orderRequest
+        example: !include examples/create-order-request-example.json
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/create-order-response-example.json
+      400:
+        body:
+          application/json:
+            type: object
+            example: !include examples/400-error-response-example.json
+      500:
+        body:
+          application/json:
+            type: object
+            example: !include examples/500-error-response-example.json
+            

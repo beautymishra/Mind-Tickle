@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension-documentation>
+    <configs>
+        <config name="config">
+            <description><![CDATA[Default configuration]]></description>
+            <parameters>
+                <parameter name="expirationPolicy">
+                    <description><![CDATA[Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit.]]></description>
+                </parameter>
+            </parameters>
+        </config>
+    </configs>
+    <connections>
+        <connection name="connection">
+            <description><![CDATA[Connection Provider that provides CloudHubConnection.]]></description>
+            <parameters>
+                <parameter name="username">
+                    <description><![CDATA[Username of the Anypoint Platform Account]]></description>
+                </parameter>
+                <parameter name="password">
+                    <description><![CDATA[Password of the Anypoint Platform Account]]></description>
+                </parameter>
+                <parameter name="environment">
+                    <description><![CDATA[Platform Environment to use. It is Optional, and by default will be used the one defined as Default in the platform.]]></description>
+                </parameter>
+                <parameter name="anypointPlatformUrl">
+                    <description><![CDATA[This is used to change between the US and EU Anypoint Platform if is required.]]></description>
+                </parameter>
+                <parameter name="reconnection">
+                    <description><![CDATA[When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy]]></description>
+                </parameter>
+            </parameters>
+        </connection>
+        <connection name="connection">
+            <description><![CDATA[Connection Provider that provides CloudHubConnection.]]></description>
+            <parameters>
+                <parameter name="username">
+                    <description><![CDATA[Username of the Anypoint Platform Account]]></description>
+                </parameter>
+                <parameter name="password">
+                    <description><![CDATA[Password of the Anypoint Platform Account]]></description>
+                </parameter>
+                <parameter name="environment">
+                    <description><![CDATA[Platform Environment to use. It is Optional, and by default will be used the one defined as Default in the platform.]]></description>
+                </parameter>
+                <parameter name="anypointPlatformUrl">
+                    <description><![CDATA[This is used to change between the US and EU Anypoint Platform if is required.]]></description>
+                </parameter>
+                <parameter name="reconnection">
+                    <description><![CDATA[When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy]]></description>
+                </parameter>
+            </parameters>
+        </connection>
+    </connections>
+    <extension name="CloudHub">
+        <description><![CDATA[Connector that provides the capability of Create and List Notifications and retrieve the status of created applications on CloudHub.]]></description>
+        <parameters/>
+    </extension>
+    <operations>
+        <operation name="createNotification">
+            <description><![CDATA[Creates a new Notification]]></description>
+            <parameters>
+                <parameter name="domain">
+                    <description><![CDATA[Name of the application to bind the new notification]]></description>
+                </parameter>
+                <parameter name="message">
+                    <description><![CDATA[Notification's message]]></description>
+                </parameter>
+                <parameter name="customProperties">
+                    <description><![CDATA[Additional properties for the notification]]></description>
+                </parameter>
+                <parameter name="priority">
+                    <description><![CDATA[Priority of the notification to create. INFO, WARN or ERROR.]]></description>
+                </parameter>
+                <parameter name="transactionId">
+                    <description><![CDATA[Transaction ID for the Notification]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="getApplication">
+            <description><![CDATA[Retrieves a single application by name.]]></description>
+            <parameters>
+                <parameter name="domain">
+                    <description><![CDATA[The name of the application]]></description>
+                </parameter>
+                <parameter name="streamingStrategy">
+                    <description><![CDATA[Configure if repeatable streams should be used and their behaviour]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="listApplications">
+            <description><![CDATA[Retrieves all applications in the specified environment.]]></description>
+            <parameters>
+                <parameter name="retrieveLogLevels">
+                    <description><![CDATA[Whether should retrieve Application log levels]]></description>
+                </parameter>
+                <parameter name="retrieveTrackingSettings">
+                    <description><![CDATA[Whether should retrieve Application tracking settings]]></description>
+                </parameter>
+                <parameter name="retrieveIpAddresses">
+                    <description><![CDATA[Whether should retrieve Application IP Addresses]]></description>
+                </parameter>
+                <parameter name="streamingStrategy">
+                    <description><![CDATA[Configure if repeatable streams should be used and their behaviour]]></description>
+                </parameter>
+                <parameter name="retrieveStatistics">
+                    <description><![CDATA[Whether should retrieve Application statistics]]></description>
+                </parameter>
+                <parameter name="period">
+                    <description><![CDATA[Time of statistics to gather]]></description>
+                </parameter>
+                <parameter name="periodTimeUnit">
+                    <description><![CDATA[Time Unit of the period]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="listNotifications">
+            <description><![CDATA[Lists all the available notifications for a giver domain.]]></description>
+            <parameters>
+                <parameter name="domain">
+                    <description><![CDATA[Name of the application to gather notifications from]]></description>
+                </parameter>
+                <parameter name="limit">
+                    <description><![CDATA[Number of notifications to retrieve. -1 means everything available.]]></description>
+                </parameter>
+                <parameter name="pageSize">
+                    <description><![CDATA[Size of the page to retrieve per iteration. This only should be changed for performance purposes.]]></description>
+                </parameter>
+                <parameter name="streamingStrategy">
+                    <description><![CDATA[Configure if repeatable streams should be used and their behaviour]]></description>
+                </parameter>
+                <parameter name="status">
+                    <description><![CDATA[Filters the notifications by status. Read, Unread or All.]]></description>
+                </parameter>
+                <parameter name="search">
+                    <description><![CDATA[If specified, only return notifications where the message contains this string. (Case Insensitive)]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="markNotification">
+            <description><![CDATA[Marks a notification as Read or Unread]]></description>
+            <parameters>
+                <parameter name="notificationId">
+                    <description><![CDATA[ID of the notification]]></description>
+                </parameter>
+                <parameter name="markAs">
+                    <description><![CDATA[Action to do. Mark as Read or Unread]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+    </operations>
+    <sources/>
+    <types/>
+</extension-documentation>

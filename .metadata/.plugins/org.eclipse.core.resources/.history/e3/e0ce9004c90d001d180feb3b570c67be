@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="micorp-order-management-prc-api-suite.xml" />
+	<munit:test name="post:\order:application\json:micorp-order-management-prc-api-config-test" doc:id="1abfc6e6-54a0-4eed-bfe3-18fe9203b3b7" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="3bfdddc4-24aa-4c9b-aaa7-c42a9fe80199" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://postorderapplicationjsonmicorpordermanagementprcapiconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://postorderapplicationjsonmicorpordermanagementprcapiconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://postorderapplicationjsonmicorpordermanagementprcapiconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\order:application\json:micorp-order-management-prc-api-config" doc:id="64ba4ddd-3d52-44dd-adb2-2e52f42abd49" name="post:\order:application\json:micorp-order-management-prc-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="086c6154-c320-4e99-a80b-95e702f4f764" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import postorderapplicationjsonmicorpordermanagementprcapiconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify create-item" doc:id="a38aa778-a66b-4c24-90c8-7ad8e37822b6" processor="flow-ref" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a00e8893-301e-4941-816f-6ad47437fcaf" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify create-order" doc:id="08ee861f-8269-4ae8-b300-cb5d7d5901d8" processor="flow-ref" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6364da4f-8653-493c-b3f4-20af9af5a085" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify create-customer" doc:id="8564b500-6124-49ff-97f9-57bfd6eb4beb" processor="flow-ref" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="7bc5876d-1702-41ce-bb9f-d0b6cd3ce572" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

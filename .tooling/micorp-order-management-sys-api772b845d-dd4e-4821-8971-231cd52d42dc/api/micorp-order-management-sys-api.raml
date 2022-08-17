@@ -1,0 +1,98 @@
+#%RAML 1.0
+title: MiCorp-order-management-sys-api
+description: The order management system api is used to receive order request and creates Order,Customer and item in salesforce.
+
+mediaType: 
+- application/json
+protocols:
+- HTTP
+version: V1
+
+traits:
+  errorResponse: !include traits/errortrait.raml
+
+securitySchemes:
+  security: !include security-scheme/customSecurityScheme.raml
+securedBy:
+  - security
+
+types:
+  order: !include data-type/create-order.raml
+  item: !include data-type/create-item.raml
+  customer: !include data-type/create-customer.raml
+  
+/order:
+  get:
+    description: getting all the details of order
+    queryParameters:
+      poNumber: string 
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/request/create-order.json
+    is: [errorResponse]          
+  post:
+    description: create a new order
+    body:
+      application/json: 
+        type: order      
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/responses/create-order-response.json
+    is: [errorResponse] 
+                       
+/item:
+  get:
+    description: getting all the details of item 
+    queryParameters:
+      orderId: string
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/request/create-item.json
+    is: [errorResponse]              
+  post:
+    description: create a new item 
+    body:
+      application/json:
+        type: item
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/responses/create-item-response.json
+    is: [errorResponse] 
+            
+/customer:
+  get:
+    description: getting all the details of customer
+    queryParameters:
+      orderId: string
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/request/create-customer.json
+    is: [errorResponse]                             
+  post:
+    description: create a new customer
+    body:
+      application/json:
+        type: customer
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/responses/create-customer-response.json
+    is: [errorResponse] 
+              
+   
+          
+
+            
+
+    

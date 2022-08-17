@@ -1,0 +1,14 @@
+# Listener Configuration
+http:
+  host: "0.0.0.0"
+  port: "8083"
+  basePath: "api/*"
+
+# Request Configuration
+request:
+  host: "micorp-order-management-system-api.us-e1.cloudhub.io"
+
+rate:
+  client_secret:"![Hb0wgA7gb2a/f40vToDVGKEq3tH4OwQVTmFzNirUS8lYBlvyX1umgw==]"
+  client_id:"![3tO3LNF2lC3yQGzJGDwFJRaHoBLipX8d8n2rrlDpAudPsbbkNiWrUg==]"
+ 

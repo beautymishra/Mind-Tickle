@@ -1,0 +1,32 @@
+#%RAML 1.0 DataType
+displayName: Item
+description: defines item data type 
+
+type: object
+properties:
+  id:
+    type: string
+    required: true
+    displayName: id
+    example: "34567"
+  category:
+    type: string
+    required: true
+    displayName: category
+    example: "Hoodie"
+  quantity:
+    type: number
+    required: true
+    displayName: quantity
+    example: 3
+  size:
+    type: string
+    required: true
+    displayName: size
+    example: "M"
+  orderId:
+    type: string 
+    required: true
+    displayName: orderId
+    example: "a003k00000TudZ7AAJ"
+  

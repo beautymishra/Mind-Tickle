@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.mule.tooling.runtime.muleServerLaunchType">
+    <stringAttribute key="clear_data" value="NEVER"/>
+    <booleanAttribute key="consoleEnabled" value="true"/>
+    <stringAttribute key="launch_mule_server_version" value="org.mule.tooling.server.4.4.0.ee"/>
+    <stringAttribute key="maven.command.line" value=""/>
+    <booleanAttribute key="maven.snapshot.updates" value="false"/>
+    <stringAttribute key="mule-agent-port" value="62576"/>
+    <stringAttribute key="mule-agent-token-auth" value="aa6b735c-36b2-401e-8ba4-7d1c9aee6f25"/>
+    <listAttribute key="mule-project-names">
+        <listEntry value="micorp-order-management-prc-api"/>
+        <listEntry value="micorp-order-management-sys-api"/>
+    </listAttribute>
+    <intAttribute key="mule.debug.payload.max.collection.size" value="100"/>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/micorp-order-management-sys-api"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="4"/>
+    </listAttribute>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="micorp-order-management-prc-api"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dmule.env=local&#13;&#10;-Dmule.key=mindtickle2022!&#13;&#10;-Danypoint.platform.gatekeeper=disabled"/>
+    <intAttribute key="remote-debug-max-stream-size" value="2"/>
+    <intAttribute key="remote-debug-port" value="6666"/>
+    <booleanAttribute key="remote-debug-suspend" value="false"/>
+</launchConfiguration>
